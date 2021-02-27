@@ -1,21 +1,37 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { Menu } from 'antd';
 import {
     HomeOutlined,
     SettingOutlined,
     LoginOutlined,
     UserAddOutlined,
+    LogoutOutlined,
 } from '@ant-design/icons';
+
+import { auth } from '../../firebase';
+import { useDispatch } from 'react-redux';
 
 const { SubMenu, Item } = Menu;
 
 const Header = () => {
-    // eslint-disable-next-line
     const [current, setCurrent] = useState('home');
+    let dispatch = useDispatch();
+    let history = useHistory();
 
     const handleClick = (e) => {
         setCurrent(e.key);
+    };
+
+    const logout = () => {
+        auth.signOut();
+        dispatch({
+            type: 'LOGOUT',
+            payload: null,
+        });
+
+        // redirect to login page
+        history.push('/login');
     };
 
     return (
@@ -36,6 +52,9 @@ const Header = () => {
             <SubMenu key="SubMenu" icon={<SettingOutlined />} title="Username">
                 <Item key="setting:1">Option 1</Item>
                 <Item key="setting:2">Option 2</Item>
+                <Item icon={<LogoutOutlined />} onClick={logout}>
+                    Logout
+                </Item>
             </SubMenu>
         </Menu>
     );

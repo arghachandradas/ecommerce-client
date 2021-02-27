@@ -8,6 +8,7 @@ const Register = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        // Logged the user with email link only (passwordless authentication from firebase)
         const config = {
             // URL you want to redirect back to after clicking email link
             url: process.env.REACT_APP_REGISTER_REDIRECT_URL,
@@ -31,14 +32,17 @@ const Register = () => {
                 <div className="col-md-6 offset-md-3 card p-4">
                     <h4 className="text-center">Register Form</h4>
                     <form onSubmit={handleSubmit}>
-                        <input
-                            type="email"
-                            className="form-control"
-                            value={email}
-                            placeholder="enter your email"
-                            onChange={(e) => setEmail(e.target.value)}
-                            autoFocus
-                        />
+                        <div className="form-group">
+                            <label>Email address</label>
+                            <input
+                                type="email"
+                                className="form-control"
+                                value={email}
+                                placeholder="Enter Email"
+                                onChange={(e) => setEmail(e.target.value)}
+                                autoFocus
+                            />
+                        </div>
                         <br />
                         <button
                             type="submit"

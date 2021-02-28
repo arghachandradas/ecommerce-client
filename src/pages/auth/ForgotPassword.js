@@ -8,6 +8,15 @@ const ForgotPassword = ({ history }) => {
     const [email, setEmail] = useState('');
     const [loading, setLoading] = useState(false);
 
+    // required for protected route functionality
+    const { user } = useSelector((state) => ({ ...state }));
+    useEffect(() => {
+        // if logged in, then user NOT allowed to access route for /forgot/password (i.e. this page)
+        if (user && user.token) {
+            history.push('/');
+        }
+    }, [user]);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);

@@ -1,9 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { auth } from '../../firebase';
 import { toast } from 'react-toastify';
+import { useSelector } from 'react-redux';
 
-const Register = () => {
+const Register = ({ history }) => {
     const [email, setEmail] = useState('');
+
+    // required for protected route functionality
+    const { user } = useSelector((state) => ({ ...state }));
+    useEffect(() => {
+        // if logged in, then user NOT allowed to access route for /register (i.e. this page)
+        if (user && user.token) {
+            history.push('/');
+        }
+    }, [user]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();

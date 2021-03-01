@@ -24,6 +24,14 @@ const Login = ({ history }) => {
         // eslint-disable-next-line
     }, [user]);
 
+    const roleBasedRedirect = (role) => {
+        if (role === 'admin') {
+            history.push('/admin/dashboard');
+        } else {
+            history.push('/user/history');
+        }
+    };
+
     const handleSubmit = async (e) => {
         setLoading(true);
         e.preventDefault();
@@ -51,9 +59,12 @@ const Login = ({ history }) => {
                             token: idTokenResult.token,
                         },
                     });
+
+                    // ROLE BASED REDIRECT
+                    roleBasedRedirect(role);
                 })
                 .catch((err) => console.log(err));
-            history.push('/');
+            // history.push('/');
         } catch (error) {
             console.log(error);
             toast.error(error.message);
@@ -80,9 +91,12 @@ const Login = ({ history }) => {
                             token: idTokenResult.token,
                         },
                     });
+
+                    // ROLE BASED REDIRECT
+                    roleBasedRedirect(role);
                 })
-                .catch();
-            history.push('/');
+                .catch((err) => console.log(err));
+            // history.push('/');
         } catch (error) {
             console.log(error);
             toast.error(error.message);

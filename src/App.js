@@ -12,6 +12,7 @@ import Home from './pages/Home';
 import { auth } from './firebase';
 import { useDispatch } from 'react-redux';
 import ForgotPassword from './pages/auth/ForgotPassword';
+import { currentUser } from './functions/auth';
 
 const App = () => {
     const dispatch = useDispatch();
@@ -22,13 +23,22 @@ const App = () => {
             if (user) {
                 // if user logged in
                 const idTokenResult = await user.getIdTokenResult();
-                dispatch({
-                    type: 'LOGGED_IN_USER',
-                    payload: {
-                        email: user.email,
-                        token: idTokenResult.token,
-                    },
-                });
+                // getting current user on refresh from own database
+                currentUser(idTokenResult.token)
+                    .then((res) => {
+                        const { email, name, role, _id } = res.data;
+                        dispatch({
+                            type: 'LOGGED_IN_USER',
+                            payload: {
+                                email,
+                                name,
+                                role,
+                                _id,
+                                token: idTokenResult.token,
+                            },
+                        });
+                    })
+                    .catch((err) => console.log(err));
             }
         });
 

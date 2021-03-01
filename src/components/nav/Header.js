@@ -38,9 +38,11 @@ const Header = () => {
 
     return (
         <Menu onClick={handleClick} selectedKeys={[current]} mode="horizontal">
-            <Item key="home" icon={<HomeOutlined />}>
-                <Link to="/">Home</Link>
-            </Item>
+            {user && (
+                <Item key="home" icon={<HomeOutlined />}>
+                    <Link to="/">Home</Link>
+                </Item>
+            )}
             {!user && (
                 <Item
                     key="register"

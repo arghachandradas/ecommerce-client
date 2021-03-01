@@ -15,6 +15,7 @@ const ForgotPassword = ({ history }) => {
         if (user && user.token) {
             history.push('/');
         }
+        // eslint-disable-next-line
     }, [user]);
 
     const handleSubmit = async (e) => {

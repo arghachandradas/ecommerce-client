@@ -6,6 +6,7 @@ import { MailOutlined, GoogleOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { Spin } from 'antd';
 import { Link } from 'react-router-dom';
+import { createOrUpdateUser } from '../../functions/auth';
 
 const Login = ({ history }) => {
     const [email, setEmail] = useState('');
@@ -20,6 +21,7 @@ const Login = ({ history }) => {
         if (user && user.token) {
             history.push('/');
         }
+        // eslint-disable-next-line
     }, [user]);
 
     const handleSubmit = async (e) => {
@@ -35,13 +37,22 @@ const Login = ({ history }) => {
             setLoading(false);
             const { user } = result;
             const idTokenResult = await user.getIdTokenResult();
-            dispatch({
-                type: 'LOGGED_IN_USER',
-                payload: {
-                    email: user.email,
-                    token: idTokenResult.token,
-                },
-            });
+            // passing token to backend and getting the user response from OWN SERVER
+            createOrUpdateUser(idTokenResult.token)
+                .then((res) => {
+                    const { email, name, role, _id } = res.data;
+                    dispatch({
+                        type: 'LOGGED_IN_USER',
+                        payload: {
+                            email,
+                            name,
+                            role,
+                            _id,
+                            token: idTokenResult.token,
+                        },
+                    });
+                })
+                .catch();
             history.push('/');
         } catch (error) {
             console.log(error);
@@ -55,13 +66,22 @@ const Login = ({ history }) => {
             const res = await auth.signInWithPopup(googleAuthProvider);
             const { user } = res;
             const idTokenResult = await user.getIdTokenResult();
-            dispatch({
-                type: 'LOGGED_IN_USER',
-                payload: {
-                    email: user.email,
-                    token: idTokenResult.token,
-                },
-            });
+            // passing token to backend and getting the user response from OWN SERVER
+            createOrUpdateUser(idTokenResult.token)
+                .then((res) => {
+                    const { email, name, role, _id } = res.data;
+                    dispatch({
+                        type: 'LOGGED_IN_USER',
+                        payload: {
+                            email,
+                            name,
+                            role,
+                            _id,
+                            token: idTokenResult.token,
+                        },
+                    });
+                })
+                .catch();
             history.push('/');
         } catch (error) {
             console.log(error);

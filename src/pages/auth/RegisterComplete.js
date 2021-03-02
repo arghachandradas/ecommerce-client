@@ -14,8 +14,7 @@ const RegisterComplete = ({ history }) => {
 
     useEffect(() => {
         setEmail(window.localStorage.getItem('emailForRegistration'));
-        // eslint-disable-next-line
-    }, []);
+    }, [history]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();

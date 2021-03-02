@@ -14,8 +14,7 @@ const LoadingToRedirect = () => {
         count === 0 && history.push('/');
         // cleanup
         return () => clearInterval(interval);
-        // eslint-disable-next-line
-    }, [count]);
+    }, [count, history]);
     return (
         <div className="container p-5 text-center">
             <h4>Redirecting you in {count} seconds ...</h4>

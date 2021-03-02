@@ -9,11 +9,7 @@ const UserRoute = ({ children, ...rest }) => {
     const { user } = useSelector((state) => ({ ...state }));
 
     // if we have auth user, then only we can access the route, whereever this "UserRoute" is applied
-    return user && user.token ? (
-        <Route {...rest} render={() => children} />
-    ) : (
-        <LoadingToRedirect />
-    );
+    return user && user.token ? <Route {...rest} /> : <LoadingToRedirect />;
 };
 
 export default UserRoute;

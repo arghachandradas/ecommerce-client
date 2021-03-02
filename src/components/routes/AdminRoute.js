@@ -27,11 +27,7 @@ const AdminRoute = ({ children, ...rest }) => {
     }, [user]);
 
     // if we have auth user, then only we can access the route, whereever this "AdminRoute" is applied
-    return ok ? (
-        <Route {...rest} render={() => children} />
-    ) : (
-        <LoadingToRedirect />
-    );
+    return ok ? <Route {...rest} /> : <LoadingToRedirect />;
 };
 
 export default AdminRoute;

@@ -13,8 +13,7 @@ const Register = ({ history }) => {
         if (user && user.token) {
             history.push('/');
         }
-        // eslint-disable-next-line
-    }, [user]);
+    }, [user, history]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();

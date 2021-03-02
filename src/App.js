@@ -53,8 +53,7 @@ const App = () => {
 
         // cleanUp Memory Leaks
         return () => unsubscribe();
-        // eslint-disable-next-line
-    }, []);
+    }, [dispatch]);
     return (
         <>
             <Header />

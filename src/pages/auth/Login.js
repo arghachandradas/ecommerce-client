@@ -21,8 +21,7 @@ const Login = ({ history }) => {
         if (user && user.token) {
             history.push('/');
         }
-        // eslint-disable-next-line
-    }, [user]);
+    }, [user, history]);
 
     const roleBasedRedirect = (role) => {
         if (role === 'admin') {

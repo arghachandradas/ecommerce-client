@@ -16,7 +16,6 @@ const AdminRoute = ({ children, ...rest }) => {
             currentAdmin(user.token)
                 .then((res) => {
                     // response is the current admin user from backend
-                    console.log('CURRENT ADMIN RESPONSE TO FRONTEND', res);
                     setOk(true);
                 })
                 .catch((err) => {

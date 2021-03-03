@@ -22,6 +22,7 @@ import UserRoute from './components/routes/UserRoute';
 import Password from './pages/user/Password';
 import Wishlist from './pages/user/Wishlist';
 import AdminDashboard from './pages/admin/AdminDashboard';
+import CategoryCreate from './pages/admin/category/CategoryCreate';
 
 const App = () => {
     const dispatch = useDispatch();
@@ -80,6 +81,11 @@ const App = () => {
                     exact
                     path="/admin/dashboard"
                     component={AdminDashboard}
+                />
+                <AdminRoute
+                    exact
+                    path="/admin/category"
+                    component={CategoryCreate}
                 />
             </Switch>
         </>

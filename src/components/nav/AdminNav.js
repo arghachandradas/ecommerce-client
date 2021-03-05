@@ -1,47 +1,33 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Menu } from 'antd';
+const { Item } = Menu;
 
 const AdminNav = () => {
     return (
-        <nav>
-            <ul className="nav flex-column">
-                <li className="nav-item">
-                    <Link to="/admin/dashboard" className="nav-link">
-                        Dashboard
-                    </Link>
-                </li>
-                <li className="nav-item">
-                    <Link to="/admin/product" className="nav-link">
-                        Product
-                    </Link>
-                </li>
-                <li className="nav-item">
-                    <Link to="/admin/products" className="nav-link">
-                        Products
-                    </Link>
-                </li>
-                <li className="nav-item">
-                    <Link to="/admin/category" className="nav-link">
-                        Category
-                    </Link>
-                </li>
-                <li className="nav-item">
-                    <Link to="/admin/sub" className="nav-link">
-                        Sub Category
-                    </Link>
-                </li>
-                <li className="nav-item">
-                    <Link to="/admin/coupon" className="nav-link">
-                        Coupon
-                    </Link>
-                </li>
-                <li className="nav-item">
-                    <Link to="/user/password" className="nav-link">
-                        Password
-                    </Link>
-                </li>
-            </ul>
-        </nav>
+        <Menu style={{ width: 256 }} mode="vertical">
+            <Item key="dashboard">
+                <Link to="/admin/dashboard">Dashboard</Link>
+            </Item>
+            <Item key="product">
+                <Link to="/admin/product">Product</Link>
+            </Item>
+            <Item key="products">
+                <Link to="/admin/products">Products</Link>
+            </Item>
+            <Item key="category">
+                <Link to="/admin/category">Category</Link>
+            </Item>
+            <Item key="subCategory">
+                <Link to="/admin/sub">Sub Category</Link>
+            </Item>
+            <Item key="coupon">
+                <Link to="/admin/coupon">Coupon</Link>
+            </Item>
+            <Item key="password">
+                <Link to="/user/password">Password</Link>
+            </Item>
+        </Menu>
     );
 };
 

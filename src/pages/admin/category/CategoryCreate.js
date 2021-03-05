@@ -77,7 +77,7 @@ const CategoryCreate = () => {
                 <div className="col-md-2">
                     <AdminNav />
                 </div>
-                <div className="col row">
+                <div className="col-md-10">
                     <div className="col-md-10 offset-md-1 card p-2 mt-4">
                         {loading ? (
                             <div className="text-center">
